@@ -4,4 +4,6 @@ Technologies
 
 - Ruby
 - Rails
-- `rspec`-rails gem
+- `rspec-rails` gem
+
+[TESTING WALKTHROUGH ARTICLE](https://rubyyagi.com/rspec-request-spec/)
