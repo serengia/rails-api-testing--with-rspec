@@ -3,8 +3,10 @@
 require 'rails_helper'
 
 describe 'POST /bookmarks' do
+ # create a user before the test scenarios are run
+ let!(:user) { User.create(username: 'soulchild', authentication_token: 'abcdef') }
+
   # 'scenario' is similar to 'it', use which you see fit
-  
   scenario 'valid bookmark attributes' do
     # send a POST request to /bookmarks, with these parameters
     # The controller will treat them as JSON 
@@ -13,7 +15,7 @@ describe 'POST /bookmarks' do
         url: 'https://rubyyagi.com',
         title: 'RubyYagi blog'
       }
-    }
+    }, headers: { 'X-Username': user.username, 'X-Token': user.authentication_token }
 
     # response should have HTTP Status 201 Created
     expect(response.status).to eq(201)
@@ -37,7 +39,7 @@ describe 'POST /bookmarks' do
         url: '',
         title: 'RubyYagi blog'
       }
-    }
+    }, headers: { 'X-Username': user.username, 'X-Token': user.authentication_token }
 
     # response should have HTTP Status 201 Created
     expect(response.status).to eq(422)
